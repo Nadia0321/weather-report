@@ -7,17 +7,29 @@ let tempDecreaseButton = null;
 let getRealTimeTemp = null;
 let tempValue = null;
 let gardenContent = null;
-// let gardenText = 'ok';
 let temperature = 79;
+let headerCity = null;
+let cityNameUserInput = null;
+let defaultCityName = 'Princeton'
 // }
-const showTemp = () => {
-    tempValue.textContent = temperature;
-    updateTempColor()
-}
-const showGarden = () => {
-    gardenContent.textContent = garden.summer
+
+const selectTag = () => {
+    tempIncreaseButton = document.getElementById('increaseTempControl')
+    tempDecreaseButton = document.getElementById('decreaseTempControl')
+    tempValue = document.getElementById('tempValue');
+    gardenContent = document.getElementById('landscape');
+    headerCity = document.getElementById('headerCityName');
+    cityNameUserInput = document.getElementById('cityNameInput');
 }
 
+const registerClickEvent = () => {
+    tempIncreaseButton.addEventListener('click', handleIncreaseTempClick)
+    tempDecreaseButton.addEventListener('click', handleDecreaseTempClick)
+}
+
+const registerInputEvent = () => {
+    cityNameUserInput.addEventListener('input', headerCityFunction)
+}
 const handleIncreaseTempClick = () => {
     ++temperature;
     showTemp();
@@ -26,21 +38,17 @@ const handleIncreaseTempClick = () => {
 const handleDecreaseTempClick = () => {
     --temperature
     showTemp();
-
 }
 
-const registerEvent = () => {
-    tempIncreaseButton.addEventListener('click', handleIncreaseTempClick)
-    tempDecreaseButton.addEventListener('click', handleDecreaseTempClick)
+const showTemp = () => {
+    tempValue.textContent = temperature;
+    updateTempColor()
 }
 
-const selectTag = () => {
-    tempIncreaseButton = document.getElementById('increaseTempControl')
-    tempDecreaseButton = document.getElementById('decreaseTempControl')
-    tempValue = document.getElementById('tempValue');
-    gardenContent = document.getElementById('landscape');
-
+const headerCityFunction = () => {
+    headerCity.textContent = cityNameUserInput.value; //defaultCityName;
 }
+
 
 const updateTempColor = () => {
     if (temperature >= 80) {
@@ -76,8 +84,10 @@ const garden = {
 const onLoad = () => {
     selectTag()
     showTemp()
-    registerEvent()
-    showGarden()
+    registerClickEvent()
+    registerInputEvent()
+    cityNameUserInput.value = defaultCityName
+    headerCityFunction()
     console.log('hi')
 
 }
