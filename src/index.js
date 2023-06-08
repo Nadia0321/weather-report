@@ -14,6 +14,7 @@ let defaultCityName = 'Princeton'
 let skyTemplate = null
 let skyOption = null
 let skyInput = null
+let resetCityName = null
 // const optionArray = null
 // }
 
@@ -26,6 +27,7 @@ const selectTag = () => {
     cityNameUserInput = document.getElementById('cityNameInput');
     skyInput = document.getElementById('skySelect')
     skyTemplate = document.getElementById('sky')
+    resetCityName = document.getElementById('cityNameReset')
 }
 const createOptions = () => {
     const optionArray = ['Sunny', 'Cloudy', 'Snowy', 'Rainy']
@@ -39,7 +41,7 @@ const createOptions = () => {
 const registerClickEvent = () => {
     tempIncreaseButton.addEventListener('click', handleIncreaseTempClick)
     tempDecreaseButton.addEventListener('click', handleDecreaseTempClick)
-
+    resetCityName.addEventListener('click', handleResetButton)
 }
 
 const registerSkyEvent = () => {
@@ -72,6 +74,11 @@ const skyInputHandler = () => {
     const input = skyInput.value
     // con
     skyTemplate.textContent = sky[input]
+}
+
+const handleResetButton = () => {
+    cityNameUserInput.value = "";
+    headerCity.textContent = ""
 }
 
 
