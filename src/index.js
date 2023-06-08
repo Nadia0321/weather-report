@@ -11,6 +11,10 @@ let temperature = 79;
 let headerCity = null;
 let cityNameUserInput = null;
 let defaultCityName = 'Princeton'
+let skyTemplate = null
+let skyOption = null
+let skyInput = null
+// const optionArray = null
 // }
 
 const selectTag = () => {
@@ -20,11 +24,26 @@ const selectTag = () => {
     gardenContent = document.getElementById('landscape');
     headerCity = document.getElementById('headerCityName');
     cityNameUserInput = document.getElementById('cityNameInput');
+    skyInput = document.getElementById('skySelect')
+    skyTemplate = document.getElementById('sky')
+}
+const createOptions = () => {
+    const optionArray = ['Sunny', 'Cloudy', 'Snowy', 'Rainy']
+    for (let i = 0; i < optionArray.length; ++i) {
+        skyOption = document.createElement('option');
+        skyOption.textContent = optionArray[i]
+        skyInput.appendChild(skyOption)
+    }
 }
 
 const registerClickEvent = () => {
     tempIncreaseButton.addEventListener('click', handleIncreaseTempClick)
     tempDecreaseButton.addEventListener('click', handleDecreaseTempClick)
+
+}
+
+const registerSkyEvent = () => {
+    skyInput.addEventListener('change', skyInputHandler)
 }
 
 const registerInputEvent = () => {
@@ -47,6 +66,12 @@ const showTemp = () => {
 
 const headerCityFunction = () => {
     headerCity.textContent = cityNameUserInput.value; //defaultCityName;
+}
+
+const skyInputHandler = () => {
+    const input = skyInput.value
+    // con
+    skyTemplate.textContent = sky[input]
 }
 
 
@@ -74,6 +99,12 @@ const updateTempColor = () => {
     }
 }
 
+const sky = {
+    Sunny: `☀️☀️☀️☀️☀️☀️☀️☀️`,
+    Cloudy: `☁️☁️ ☁️ ☁️☁️ ☁️ 🌤 ☁️ ☁️☁️`,
+    Rainy: `🌧🌈⛈🌧🌧💧⛈🌧🌦🌧💧🌧🌧`,
+    Snowy: `🌨❄️🌨🌨❄️❄️🌨❄️🌨❄️❄️🌨🌨`
+}
 
 const garden = {
     summer: '🌵__🐍_🦂_🌵🌵__🐍_🏜_🦂',
@@ -88,8 +119,10 @@ const onLoad = () => {
     registerInputEvent()
     cityNameUserInput.value = defaultCityName
     headerCityFunction()
+    createOptions()
+    skyTemplate.textContent = sky.Sunny
+    registerSkyEvent()
     console.log('hi')
-
 }
 // onLoad()
 document.addEventListener('DOMContentLoaded', onLoad)

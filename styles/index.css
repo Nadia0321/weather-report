@@ -133,6 +133,10 @@ body {
     font-family: "Rubik", sans-serif;
 }
 
+.skySelect {
+    padding: 50px,
+}
+
 .red {
     color: red;
 }
