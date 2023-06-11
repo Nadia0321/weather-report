@@ -30,6 +30,7 @@ const selectTag = () => {
     resetCityName = document.getElementById('cityNameReset');
     realTimeTemperature = document.getElementById('currentTempButton');
 };
+//Create optionsa element for sky in the HTML file
 const createOptions = () => {
     const optionArray = ['Sunny', 'Cloudy', 'Snowy', 'Rainy'];
     for (let i = 0; i < optionArray.length; ++i) {
@@ -39,20 +40,15 @@ const createOptions = () => {
     }
 };
 
-const registerClickEvent = () => {
+const registerEvent = () => {
     tempIncreaseButton.addEventListener('click', handleIncreaseTempClick);
     tempDecreaseButton.addEventListener('click', handleDecreaseTempClick);
     resetCityName.addEventListener('click', handleResetButton);
     realTimeTemperature.addEventListener('click', handleRealTemp);
-};
-
-const registerSkyEvent = () => {
     skyInput.addEventListener('change', skyInputHandler);
-};
-
-const registerInputEvent = () => {
     cityNameUserInput.addEventListener('input', headerCityFunction);
 };
+
 const handleIncreaseTempClick = () => {
     ++temperature;
     showTemp();
@@ -62,6 +58,8 @@ const handleDecreaseTempClick = () => {
     --temperature;
     showTemp();
 };
+
+
 
 const showTemp = () => {
     tempValue.textContent = temperature;
@@ -85,8 +83,10 @@ const handleResetButton = () => {
 // wave 4 - calling API
 const handleRealTemp = async () => {
     tempValue.textContent = Math.floor((await getWeather() - 273.15) * 9/5 + 32 );
+    temperature = tempValue.textContent
+    updateTempColor();
 };
-// wave 4 - calling API
+
 const getLanLon = async (placeName) => {
     const response = await axios.get('http://127.0.0.1:5000/location', {
         params: {
@@ -147,14 +147,12 @@ const garden = {
 const onLoad = () => {
     selectTag();
     showTemp();
-    registerClickEvent();
-    registerInputEvent();
+    registerEvent();
     cityNameUserInput.value = defaultCityName;
     headerCityFunction();
     createOptions();
     skyTemplate.textContent = sky.Sunny;
-    registerSkyEvent();
-    
+
 };
 // onLoad()
 document.addEventListener('DOMContentLoaded', onLoad);
