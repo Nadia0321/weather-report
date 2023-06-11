@@ -1,6 +1,7 @@
 h2 {
     margin: 0 auto 2rem auto;
     font-size: 22px;
+    /* margin-bottom: 50 px; */
 
 }
 
@@ -12,7 +13,7 @@ body {
 
     font-family: "Rubik", sans-serif;
     /* font-size: 12px; */
-    background-color: #283650;
+    background-color: #505f7a;
     margin: 2rem;
 }
 
@@ -124,7 +125,7 @@ body {
 
 .garden__section>h2 {
     color: black;
-    padding: 150px 0 0 0;
+    padding: 100px 0px 0 0;
     font-family: "Rubik", sans-serif;
 }
 
@@ -146,11 +147,13 @@ body {
     background-color: white;
     height: 600px;
     border-radius: 8px;
+    margin-left: 40px;
+    width: 400px
 }
 
 .city-name__reset-btn {
     border: 0;
-    background-color: #5c6880;
+    background-color: #485c83;
     color: white;
     border-radius: 8px;
     padding: 1rem;
