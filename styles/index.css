@@ -9,17 +9,19 @@ body {
     grid-gap: 1rem;
 
     font-family: "Rubik", sans-serif;
-    font-size: 18px;
-    background-color: #1b69f9;
+    font-size: 12px;
+    background-color: #13284e;
     margin: 2rem;
 }
 
 #increaseTempControl {
     background-color: white;
+    height: 30px;
 }
 
 #decreaseTempControl {
     background-color: white;
+    height: 30px;
 }
 
 .header__header {
@@ -36,8 +38,16 @@ body {
 }
 
 .header__city-name {
-    font-style: oblique;
-    font-size: 2rem;
+    font-style: "Rubik", sans-serif;
+    font-size: 36px;
+    font-weight: bold;
+    /* font-size: 2rem; */
+}
+
+#for-the {
+    font-style: "Rubik", sans-serif;
+    font-size: 102px !important;
+    font-weight: bold;
 }
 
 .header__city-name::before,
@@ -58,10 +68,13 @@ body {
 }
 
 .temperature__section button {
-    background-color: #1b69f9;
+    width: 120px;
+    height: 70px;
+    margin: auto;
+    background-color: #485c83;
     border: none;
-    color: white;
-    padding: 15px 32px;
+    color: rgb(236, 243, 237);
+    padding: 0px 0px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
@@ -121,7 +134,7 @@ body {
     justify-content: space-between;
 
     border-radius: 8px;
-    font-size: 2em;
+    font-size: 3em;
 }
 
 .city-name__reset-btn {
@@ -131,6 +144,10 @@ body {
     border-radius: 8px;
     padding: 1rem;
     font-family: "Rubik", sans-serif;
+}
+
+.currentTempButton {
+    height: 10px;
 }
 
 .skySelect {
