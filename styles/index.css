@@ -11,7 +11,7 @@ body {
     grid-gap: 1rem;
 
     font-family: "Rubik", sans-serif;
-    font-size: 12px;
+    /* font-size: 12px; */
     background-color: #283650;
     margin: 2rem;
 }
@@ -48,7 +48,7 @@ body {
 
 #for-the {
     font-style: "Rubik", sans-serif;
-    font-size: 102px !important;
+    font-size: 35px;
     font-weight: bold;
 }
 
