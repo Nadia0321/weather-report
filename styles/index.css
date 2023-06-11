@@ -1,5 +1,6 @@
 h2 {
     margin: 0 auto 2rem auto;
+    font-size: 22px;
 }
 
 body {
@@ -10,7 +11,7 @@ body {
 
     font-family: "Rubik", sans-serif;
     font-size: 12px;
-    background-color: #13284e;
+    background-color: #283650;
     margin: 2rem;
 }
 
@@ -78,7 +79,7 @@ body {
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 16px;
+    font-size: 14px;
     border-radius: 10px
 }
 
@@ -109,6 +110,7 @@ body {
     /* margin-left: 1.5rem; */
     width: 100px;
     text-align: center;
+    /* margin: auto; */
     /* padding-right: 1rem; */
     /* margin-right: 1.5rem; */
 }
@@ -139,7 +141,7 @@ body {
 
 .city-name__reset-btn {
     border: 0;
-    background-color: #1655cc;
+    background-color: #5c6880;
     color: white;
     border-radius: 8px;
     padding: 1rem;
@@ -150,9 +152,9 @@ body {
     height: 10px;
 }
 
-.skySelect {
-    padding: 50px,
-}
+/* #skySelect {
+    padding: 0 0px 0;
+} */
 
 .red {
     color: red;
