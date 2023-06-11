@@ -10,77 +10,102 @@ let gardenContent = null;
 let temperature = 79;
 let headerCity = null;
 let cityNameUserInput = null;
-let defaultCityName = 'Princeton'
-let skyTemplate = null
-let skyOption = null
-let skyInput = null
-let resetCityName = null
-// const optionArray = null
+let defaultCityName = 'Princeton';
+let skyTemplate = null;
+let skyOption = null;
+let skyInput = null;
+let resetCityName = null;
+let realTimeTemperature = null;
 // }
 
 const selectTag = () => {
-    tempIncreaseButton = document.getElementById('increaseTempControl')
-    tempDecreaseButton = document.getElementById('decreaseTempControl')
+    tempIncreaseButton = document.getElementById('increaseTempControl');
+    tempDecreaseButton = document.getElementById('decreaseTempControl');
     tempValue = document.getElementById('tempValue');
     gardenContent = document.getElementById('landscape');
     headerCity = document.getElementById('headerCityName');
     cityNameUserInput = document.getElementById('cityNameInput');
-    skyInput = document.getElementById('skySelect')
-    skyTemplate = document.getElementById('sky')
-    resetCityName = document.getElementById('cityNameReset')
-}
+    skyInput = document.getElementById('skySelect');
+    skyTemplate = document.getElementById('sky');
+    resetCityName = document.getElementById('cityNameReset');
+    realTimeTemperature = document.getElementById('currentTempButton');
+};
 const createOptions = () => {
-    const optionArray = ['Sunny', 'Cloudy', 'Snowy', 'Rainy']
+    const optionArray = ['Sunny', 'Cloudy', 'Snowy', 'Rainy'];
     for (let i = 0; i < optionArray.length; ++i) {
         skyOption = document.createElement('option');
-        skyOption.textContent = optionArray[i]
-        skyInput.appendChild(skyOption)
+        skyOption.textContent = optionArray[i];
+        skyInput.appendChild(skyOption);
     }
-}
+};
 
 const registerClickEvent = () => {
-    tempIncreaseButton.addEventListener('click', handleIncreaseTempClick)
-    tempDecreaseButton.addEventListener('click', handleDecreaseTempClick)
-    resetCityName.addEventListener('click', handleResetButton)
-}
+    tempIncreaseButton.addEventListener('click', handleIncreaseTempClick);
+    tempDecreaseButton.addEventListener('click', handleDecreaseTempClick);
+    resetCityName.addEventListener('click', handleResetButton);
+    realTimeTemperature.addEventListener('click', handleRealTemp);
+};
 
 const registerSkyEvent = () => {
-    skyInput.addEventListener('change', skyInputHandler)
-}
+    skyInput.addEventListener('change', skyInputHandler);
+};
 
 const registerInputEvent = () => {
-    cityNameUserInput.addEventListener('input', headerCityFunction)
-}
+    cityNameUserInput.addEventListener('input', headerCityFunction);
+};
 const handleIncreaseTempClick = () => {
     ++temperature;
     showTemp();
-}
+};
 
 const handleDecreaseTempClick = () => {
-    --temperature
+    --temperature;
     showTemp();
-}
+};
 
 const showTemp = () => {
     tempValue.textContent = temperature;
-    updateTempColor()
-}
+    updateTempColor();
+};
 
 const headerCityFunction = () => {
     headerCity.textContent = cityNameUserInput.value; //defaultCityName;
-}
+};
 
 const skyInputHandler = () => {
-    const input = skyInput.value
-    // con
-    skyTemplate.textContent = sky[input]
-}
+    const input = skyInput.value;
+    skyTemplate.textContent = sky[input];
+};
 
 const handleResetButton = () => {
-    cityNameUserInput.value = "";
-    headerCity.textContent = ""
-}
+    cityNameUserInput.value = '';
+    headerCity.textContent = '';
+};
 
+// wave 4 - calling API
+const handleRealTemp = async () => {
+    tempValue.textContent = Math.floor((await getWeather() - 273.15) * 9/5 + 32 );
+};
+// wave 4 - calling API
+const getLanLon = async (placeName) => {
+    const response = await axios.get('http://127.0.0.1:5000/location', {
+        params: {
+            q: placeName,
+        },
+    });
+    const { lat: latitude, lon: longitude } = response.data[0];
+    return { latitude, longitude };
+};
+const getWeather = async () => {
+    const { latitude, longitude } = await getLanLon(cityNameUserInput.value);
+    const response = await axios.get('http://127.0.0.1:5000/weather', {
+        params: {
+            lat: latitude,
+            lon: longitude,
+        },
+    });
+    return response.data.main.temp;
+};
 
 const updateTempColor = () => {
     if (temperature >= 80) {
@@ -89,47 +114,47 @@ const updateTempColor = () => {
         gardenContent.textContent = garden.summer;
     } else if (temperature >= 70 && temperature < 80) {
         tempValue.classList.add('orange');
-        tempValue.classList.remove('red', 'yellow', 'yellow-green', 'teal')
+        tempValue.classList.remove('red', 'yellow', 'yellow-green', 'teal');
         gardenContent.textContent = garden.spring;
     } else if (temperature >= 60 && temperature < 70) {
         tempValue.classList.add('yellow');
-        tempValue.classList.remove('orange', 'red', 'yellow-green', 'teal')
+        tempValue.classList.remove('orange', 'red', 'yellow-green', 'teal');
         gardenContent.textContent = garden.fall;
     } else if (temperature >= 50 && temperature < 60) {
         tempValue.classList.add('yellow-green');
-        tempValue.classList.remove('orange', 'yellow', 'red', 'teal')
+        tempValue.classList.remove('orange', 'yellow', 'red', 'teal');
         gardenContent.textContent = garden.winter;
     } else {
-        tempValue.classList.add('teal')
-        tempValue.classList.remove('orange', 'yellow-green', 'red', 'yellow')
+        tempValue.classList.add('teal');
+        tempValue.classList.remove('orange', 'yellow-green', 'red', 'yellow');
         gardenContent.textContent = garden.winter;
     }
-}
+};
 
 const sky = {
     Sunny: `☀️☀️☀️☀️☀️☀️☀️☀️`,
     Cloudy: `☁️☁️ ☁️ ☁️☁️ ☁️ 🌤 ☁️ ☁️☁️`,
     Rainy: `🌧🌈⛈🌧🌧💧⛈🌧🌦🌧💧🌧🌧`,
-    Snowy: `🌨❄️🌨🌨❄️❄️🌨❄️🌨❄️❄️🌨🌨`
-}
+    Snowy: `🌨❄️🌨🌨❄️❄️🌨❄️🌨❄️❄️🌨🌨`,
+};
 
 const garden = {
     summer: '🌵__🐍_🦂_🌵🌵__🐍_🏜_🦂',
     spring: '🌸🌿🌼__🌷🌻🌿_☘️🌱_🌻🌷',
     fall: '🌾🌾_🍃_🪨__🛤_🌾🌾🌾_🍃',
-    winter: '🌲🌲⛄️🌲⛄️🍂🌲🍁🌲🌲⛄️🍂🌲'
-}
+    winter: '🌲🌲⛄️🌲⛄️🍂🌲🍁🌲🌲⛄️🍂🌲',
+};
 const onLoad = () => {
-    selectTag()
-    showTemp()
-    registerClickEvent()
-    registerInputEvent()
-    cityNameUserInput.value = defaultCityName
-    headerCityFunction()
-    createOptions()
-    skyTemplate.textContent = sky.Sunny
-    registerSkyEvent()
-    console.log('hi')
-}
+    selectTag();
+    showTemp();
+    registerClickEvent();
+    registerInputEvent();
+    cityNameUserInput.value = defaultCityName;
+    headerCityFunction();
+    createOptions();
+    skyTemplate.textContent = sky.Sunny;
+    registerSkyEvent();
+    
+};
 // onLoad()
-document.addEventListener('DOMContentLoaded', onLoad)
+document.addEventListener('DOMContentLoaded', onLoad);
