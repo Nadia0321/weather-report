@@ -82,13 +82,13 @@ const handleResetButton = () => {
 
 // wave 4 - calling API
 const handleRealTemp = async () => {
-    tempValue.textContent = Math.floor((await getWeather() - 273.15) * 9/5 + 32 );
+    tempValue.textContent = Math.floor((await getWeather() - 273.15) * 9 / 5 + 32);
     temperature = tempValue.textContent
     updateTempColor();
 };
 
 const getLanLon = async (placeName) => {
-    const response = await axios.get('http://127.0.0.1:5000/location', {
+    const response = await axios.get('https://weather-proxy-cv4w.onrender.com/location', {
         params: {
             q: placeName,
         },
@@ -98,7 +98,7 @@ const getLanLon = async (placeName) => {
 };
 const getWeather = async () => {
     const { latitude, longitude } = await getLanLon(cityNameUserInput.value);
-    const response = await axios.get('http://127.0.0.1:5000/weather', {
+    const response = await axios.get('https://weather-proxy-cv4w.onrender.com/weather', {
         params: {
             lat: latitude,
             lon: longitude,
