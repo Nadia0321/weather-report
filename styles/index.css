@@ -15,11 +15,11 @@ body {
     /* font-size: 12px; */
     background-image: url(../assets/images/mark-harpur-K2s_YE031CA-unsplash.jpg);
     /* margin: 2rem; */
-    background-size:cover;
+    background-size: cover;
     background-repeat: no-repeat;
-    background-attachment:fixed;
+    background-attachment: fixed;
     margin-left: 5rem;
-    width:max-content;
+    width: max-content;
 }
 
 #increaseTempControl {
@@ -153,7 +153,7 @@ body {
     height: 600px;
     border-radius: 8px;
     margin-left: 40px;
-    width: 400px
+    width: 800px
 }
 
 .city-name__reset-btn {
@@ -163,6 +163,12 @@ body {
     border-radius: 8px;
     padding: 1rem;
     font-family: "Rubik", sans-serif;
+}
+
+button:active {
+    color: white;
+    background-color: rgb(131, 129, 129);
+    box-shadow: 20px;
 }
 
 .currentTempButton {
