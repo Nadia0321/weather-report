@@ -1,5 +1,6 @@
 'use strict';
-
+import 'regenerator-runtime/runtime';
+import axios from 'axios';
 // const temperature = 1  // for now CHANGE LATER
 // const state = {
 let tempIncreaseButton = null;
